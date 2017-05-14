@@ -2,3 +2,4 @@
 
 #Commands
 mctweet.command.mctweet=/mctweet MCTweetMOD command, see "/mctweet help" for details.
+mctweet.command.notfound=It is an unknown command. Please check the command list with "/mctweet help".

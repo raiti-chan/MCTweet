@@ -1,4 +1,5 @@
 #MCTweet 日本語 言語ファイル
 
 #コマンド
-mctweet.command.mctweet=/mctweet MCTweetMODのコマンドです、詳しくは/mctweet help を参照してください
+mctweet.command.mctweet=/mctweet MCTweetMODのコマンドです、詳しくは/mctweet help を参照してください。
+mctweet.command.notfound=未知のコマンドです。/mctweet help でコマンド一覧を確認してください。

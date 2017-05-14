@@ -56,7 +56,7 @@ public class MCTweet {
 	public void preInit (FMLPreInitializationEvent event) {
 		writeMetadata();//MODメタデータの書き込み
 		MCTweetConfig.getINSTANCE().init(event.getSuggestedConfigurationFile());//Configの初期化
-		ClientCommandHandler.instance.registerCommand(new MCTweetCommandManager());// コマンドの登録
+		ClientCommandHandler.instance.registerCommand(MCTweetCommandManager.INSTANCE);// コマンドの登録
 	}
 	
 	/**
