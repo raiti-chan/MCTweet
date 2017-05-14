@@ -4,11 +4,18 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.raitichan.MCTweet.MCTweet;
 
 
 /**
+ * This class managed MCTweet's config class.
+ * It's singleton class.
  * <br>Created by Raiti-chan on 2017/05/13.
  *
  * @author Raiti-chan
@@ -43,6 +50,7 @@ public class MCTweetConfig {
 	 * Private constructor.
 	 */
 	private MCTweetConfig () {
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
 	//==SM==============================================================================================================
@@ -98,11 +106,23 @@ public class MCTweetConfig {
 	
 	/**
 	 * Get to configuration.
+	 *
 	 * @return configuration.
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public Configuration getConfiguration() {
+	public Configuration getConfiguration () {
 		return this.configuration;
+	}
+	
+	/**
+	 * This method occurs changed config.
+	 *
+	 * @param event event.
+	 */
+	@SuppressWarnings("unused")
+	@SubscribeEvent
+	public void onConfigChanged (ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.getModID().equals(MCTweet.MOD_ID)) syncConfig();
 	}
 	
 	//==================================================================================================================
@@ -110,6 +130,7 @@ public class MCTweetConfig {
 	/**
 	 * Config key enums.
 	 */
+	@SuppressWarnings("unused")
 	public enum ConfigKey {
 		API_KEY(ConfigGroup.API, "APIKey", Property.Type.STRING, "Twitter api key.", "default"),
 		API_SECRET(ConfigGroup.API, "APISecret", Property.Type.STRING, "Twitter api secret", "default"),

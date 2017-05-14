@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 
 /**
+ * MCTweet config gui factory.
  * <br>Created by Raiti-chan on 2017/05/13.
  *
  * @author Raiti-chan

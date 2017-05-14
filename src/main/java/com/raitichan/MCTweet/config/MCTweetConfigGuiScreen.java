@@ -12,6 +12,7 @@ import net.minecraftforge.fml.client.config.IConfigElement;
 import com.raitichan.MCTweet.MCTweet;
 
 /**
+ * MCTweet config gui screen.
  * <br>Created by Raiti-chan on 2017/05/13.
  *
  * @author Raiti-chan

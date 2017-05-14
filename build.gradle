@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
 		classpath 'org.jetbrains:annotations:13.0'
+        classpath 'org.twitter4j:twitter4j-core:4.0.2'
     }
 }
 
@@ -45,6 +46,7 @@ minecraft {
 dependencies {
 	
 	compile 'org.jetbrains:annotations:13.0'
+	compile 'org.twitter4j:twitter4j-core:4.0.2'
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

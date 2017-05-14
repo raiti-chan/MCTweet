@@ -1,11 +1,11 @@
 package com.raitichan.MCTweet;
 
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 
+import com.raitichan.MCTweet.commands.MCTweetCommandManager;
 import com.raitichan.MCTweet.config.MCTweetConfig;
 
 /**
@@ -56,6 +56,7 @@ public class MCTweet {
 	public void preInit (FMLPreInitializationEvent event) {
 		writeMetadata();//MODメタデータの書き込み
 		MCTweetConfig.getINSTANCE().init(event.getSuggestedConfigurationFile());//Configの初期化
+		ClientCommandHandler.instance.registerCommand(new MCTweetCommandManager());// コマンドの登録
 	}
 	
 	/**
@@ -74,6 +75,10 @@ public class MCTweet {
 	@Mod.EventHandler
 	public void  postInit (FMLPostInitializationEvent event) {
 	
+	}
+	
+	public void aVoid (FMLServerStartingEvent event) {
+		event.registerServerCommand(null);
 	}
 	
 	
