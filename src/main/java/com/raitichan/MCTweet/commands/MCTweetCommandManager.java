@@ -38,6 +38,7 @@ public class MCTweetCommandManager extends CommandBase {
 	private Set<MCTweetCommandBase> commandSet = new HashSet<>();
 	
 	private MCTweetCommandManager () {
+		this.registerCommand(new MCTweetCommandHelp());
 	}
 	
 	
@@ -123,7 +124,7 @@ public class MCTweetCommandManager extends CommandBase {
 	}
 	
 	
-	protected List<MCTweetCommandBase> getPossibleCommands(ICommandSender sender) {
+	List<MCTweetCommandBase> getPossibleCommands (ICommandSender sender) {
 		List<MCTweetCommandBase> list = new ArrayList<>();
 		for (MCTweetCommandBase command : this.commandSet) {
 			if (command.checkPermission(Minecraft.getMinecraft().getIntegratedServer(), sender)) {
@@ -131,6 +132,10 @@ public class MCTweetCommandManager extends CommandBase {
 			}
 		}
 		return list;
+	}
+	
+	Map<String, MCTweetCommandBase> getCommandsMap () {
+		return this.commandMap;
 	}
 	
 	

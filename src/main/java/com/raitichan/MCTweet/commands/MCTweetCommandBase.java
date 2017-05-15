@@ -39,7 +39,7 @@ public abstract class MCTweetCommandBase implements ICommand {
 	 */
 	@Override
 	public boolean checkPermission (@Nullable MinecraftServer server, @NotNull ICommandSender sender) {
-		return false;
+		return true;
 	}
 	
 	/**

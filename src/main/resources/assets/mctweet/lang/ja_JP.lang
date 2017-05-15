@@ -2,4 +2,5 @@
 
 #コマンド
 mctweet.command.mctweet=/mctweet MCTweetMODのコマンドです、詳しくは/mctweet help を参照してください。
+mctweet.command.help=/mctweet help <command|index> この文を表示、もしくは指定されたコマンドのヘルプを表示します。また数値を入れることでページを切り替えられます。
 mctweet.command.notfound=未知のコマンドです。/mctweet help でコマンド一覧を確認してください。
