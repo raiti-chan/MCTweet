@@ -4,9 +4,14 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.raitichan.MCTweet.commands.MCTweetCommandManager;
+import com.raitichan.MCTweet.client.commands.MCTweetCommandManager;
+import com.raitichan.MCTweet.client.gui.MCTweetGuiHandler;
 import com.raitichan.MCTweet.config.MCTweetConfig;
+import com.raitichan.MCTweet.twitter.TwitterCore;
 
 /**
  * This mod makes it possible to Tweet from Minecraft.
@@ -47,16 +52,24 @@ public class MCTweet {
 	@Mod.Metadata
 	public static ModMetadata metadata;
 	
+	/**
+	 * MOD Instance.
+	 */
+	@Mod.Instance
+	public static MCTweet instance;
+	
 	
 	/**
 	 * PreInit.
 	 * @param event FMLEvent.
 	 */
 	@Mod.EventHandler
+	@SideOnly(Side.CLIENT)
 	public void preInit (FMLPreInitializationEvent event) {
 		writeMetadata();//MODメタデータの書き込み
 		MCTweetConfig.getINSTANCE().init(event.getSuggestedConfigurationFile());//Configの初期化
 		ClientCommandHandler.instance.registerCommand(MCTweetCommandManager.INSTANCE);// コマンドの登録
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MCTweetGuiHandler());
 	}
 	
 	/**
@@ -74,11 +87,7 @@ public class MCTweet {
 	 */
 	@Mod.EventHandler
 	public void  postInit (FMLPostInitializationEvent event) {
-	
-	}
-	
-	public void aVoid (FMLServerStartingEvent event) {
-		event.registerServerCommand(null);
+		TwitterCore.getInstance().getAccessToken();
 	}
 	
 	

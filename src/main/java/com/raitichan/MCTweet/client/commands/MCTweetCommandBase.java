@@ -1,13 +1,20 @@
-package com.raitichan.MCTweet.commands;
+package com.raitichan.MCTweet.client.commands;
 
 import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import com.raitichan.MCTweet.MCTweet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,6 +26,10 @@ import org.jetbrains.annotations.Nullable;
  * @since 1.0.0
  */
 public abstract class MCTweetCommandBase implements ICommand {
+	
+	static final String COMMAND_USAGE_BASE = MCTweet.MOD_ID +".command.";
+	
+	
 	
 	
 	/**
@@ -109,4 +120,6 @@ public abstract class MCTweetCommandBase implements ICommand {
 	public final int compareTo (@NotNull ICommand o) {
 		return this.getCommandName().compareTo(o.getCommandName());
 	}
+	
+	
 }

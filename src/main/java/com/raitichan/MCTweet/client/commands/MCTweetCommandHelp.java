@@ -1,17 +1,26 @@
-package com.raitichan.MCTweet.commands;
+package com.raitichan.MCTweet.client.commands;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import com.raitichan.MCTweet.MCTweet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * <br>Created by Raiti-chan on 2017/05/15.
@@ -20,6 +29,7 @@ import com.raitichan.MCTweet.MCTweet;
  * @version 1.0.0
  * @since 1.0.0
  */
+@SideOnly(Side.CLIENT)
 public class MCTweetCommandHelp extends MCTweetCommandBase {
 	/**
 	 * Gets the name of the command
@@ -36,7 +46,18 @@ public class MCTweetCommandHelp extends MCTweetCommandBase {
 	 */
 	@Override
 	public String getCommandUsage (ICommandSender sender) {
-		return MCTweet.MOD_ID + ".command.help";
+		return COMMAND_USAGE_BASE + "help";
+	}
+	
+	@NotNull
+	@Override
+	public List<String> getTabCompletionOptions (MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
+		if (args.length == 1) {
+			Set<String> set = MCTweetCommandManager.INSTANCE.getCommandsMap().keySet();
+			return CommandBase.getListOfStringsMatchingLastWord(args, (String[]) set.toArray(new String[set.size()]));
+		} else {
+			return Collections.emptyList();
+		}
 	}
 	
 	/**
