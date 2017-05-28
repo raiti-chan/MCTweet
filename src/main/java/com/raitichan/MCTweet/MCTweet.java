@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.raitichan.MCTweet.client.commands.MCTweetCommandManager;
 import com.raitichan.MCTweet.client.gui.MCTweetGuiHandler;
 import com.raitichan.MCTweet.config.MCTweetConfig;
+import com.raitichan.MCTweet.twitter.TaskThread;
 import com.raitichan.MCTweet.twitter.TwitterCore;
 
 /**
@@ -58,6 +59,8 @@ public class MCTweet {
 	@Mod.Instance
 	public static MCTweet instance;
 	
+	public TaskThread taskThread = new TaskThread();
+	
 	
 	/**
 	 * PreInit.
@@ -70,6 +73,8 @@ public class MCTweet {
 		MCTweetConfig.getINSTANCE().init(event.getSuggestedConfigurationFile());//Configの初期化
 		ClientCommandHandler.instance.registerCommand(MCTweetCommandManager.INSTANCE);// コマンドの登録
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MCTweetGuiHandler());
+		this.taskThread.start();
+		
 	}
 	
 	/**

@@ -32,9 +32,13 @@ public class TwitterCore {
 		return INSTANCE;
 	}
 	
+	private void newTwitter() {
+		this.twitter = new TwitterFactory().getInstance();
+		this.setConsumer(twitter);
+	}
+	
 	public String getRequestToken () throws TwitterException {
-		this.twitter = TwitterFactory.getSingleton();
-		this.setConsumer(this.twitter);
+		this.newTwitter();
 		this.requestToken = this.twitter.getOAuthRequestToken();
 		return requestToken.getAuthorizationURL();
 	}
@@ -46,7 +50,6 @@ public class TwitterCore {
 		} else {
 			accessToken = this.twitter.getOAuthAccessToken();
 		}
-		
 		MCTweetConfig.getINSTANCE().getProperty(MCTweetConfig.ConfigKey.USER_KEY).set(accessToken.getToken());
 		MCTweetConfig.getINSTANCE().getProperty(MCTweetConfig.ConfigKey.USER_SECRET).set(accessToken.getTokenSecret());
 	}
@@ -55,16 +58,19 @@ public class TwitterCore {
 		String userKey = MCTweetConfig.getINSTANCE().getProperty(MCTweetConfig.ConfigKey.USER_KEY).getString();
 		String userSecret = MCTweetConfig.getINSTANCE().getProperty(MCTweetConfig.ConfigKey.USER_SECRET).getString();
 		if (userKey.equals("none") || userSecret.equals("none")) return;
-		TwitterFactory factory = new TwitterFactory();
 		AccessToken token = new AccessToken(userKey, userSecret);
-		this.twitter = factory.getInstance();
-		this.setConsumer(this.twitter);
+		this.newTwitter();
 		this.twitter.setOAuthAccessToken(token);
 	}
 	
 	public void tweet (String text) throws TwitterException {
 		if (this.twitter == null) return;
 		this.twitter.updateStatus(text);
+	}
+	
+	public void tweet (TweetObject object) throws TwitterException {
+		if (this.twitter == null) return;
+		this.twitter.updateStatus(object.getTweetMsg());
 	}
 	
 	private void setConsumer (Twitter twitter) {
